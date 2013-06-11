@@ -1,0 +1,10 @@
+{
+    "name": "marcel",
+    "weight": 110,
+    "gender": "m",
+    "age": 29,
+    "data": [
+        { "date": "2013-06-10", "hr_avg": 163, "duration": 22, "note": "running" },
+        { "date": "2013-06-11", "hr_avg": 158, "duration": 22, "note": "running" }
+    ]
+}
