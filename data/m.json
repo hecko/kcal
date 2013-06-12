@@ -15,6 +15,12 @@
           "duration": 22,
           "note": "running",
           "weight": 110
+        },
+        { "date": "12-Jun-2013",
+          "hr_avg": 147,
+          "duration": 25,
+          "note": "running",
+          "weight": 110
         }
     ]
 }
