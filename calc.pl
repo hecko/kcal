@@ -17,16 +17,56 @@ use JSON::XS;
 
 my $json = decode_json read_file('data/m.json');;
 
+my @www_data;
+
+$json->{max_hr}    = max_hr($json);
+$json->{cardio_hr} = cardio_hr($json);
+$json->{wl_hr}     = wl_hr($json);
+
+say "Max HR based on age (".$json->{age}."): ".int $json->{max_hr};
+say "Ideal HR for cardio: ".int $json->{cardio_hr};
+say "Ideal HR for weight loss: ".int $json->{wl_hr};
+
+say "----------";
+
 foreach my $line (@{$json->{data}}) {
+    # if we have a more recent value for weight, set that one as default
+    # if we do not have any value for weight, set default as current weight
+    if ($line->{weight}) {
+        $json->{weight} = $line->{weight};
+    } else {
+        $line->{weight} = $json->{weight};
+    };
+
+    $line->{height} ||= $json->{height}; # if not set, get the default
+
     my $data = {
-            weight => $json->{weight},
+            weight => $line->{weight},
+            height => $json->{height},
             hr => $line->{hr_avg},
             duration => $line->{duration},
             age => $json->{age},
             gender => $json->{gender},
         };
-    say $line->{date}.": ".kcal($data)." kcal; ".$line->{note};
+
+    my $kcal = kcal($data);
+    my $bmi  = bmi($data);
+
+    say $line->{date}.": ".(int $kcal)." kcal; ".(sprintf ("%.2f", $bmi))." bmi; ".
+        "avg hr: ".$line->{hr_avg}."; ".$line->{note};
+
+    push @www_data, { date => $line->{date}, "kcal" => $kcal, "bmi" => $bmi };
 };
+
+my $www_data_json = encode_json \@www_data;
+write_file('www/data/m.json', $www_data_json);
+
+sub bmi {
+  my $kg  = $_[0]->{weight};
+  my $m   = $_[0]->{height} / 100;
+  my $bmi = $kg / ($m * $m);
+  return $bmi;
+}
 
 sub kcal {
     my $kg = $_[0]->{weight};
@@ -62,22 +102,23 @@ sub kcal {
           ) / $c{$g}{x5}
         ) * $dur;
 
-    return int $kcal;
+    return $kcal;
 }
 
-#$cal{calc}{max_hr} = 208 - (0.7 * $i{age});     # hax heart rate depending on age
+sub max_hr {
+  my $max_hr = 208 - (0.7 * $_[0]->{age});     # hax heart rate depending on age
+  return $max_hr;
+}
 #$cal{calc}{burned_kj} = $cal{calc}{burned_kcal} * 4.184;
 #$cal{calc}{burned_fat_g} = $cal{calc}{burned_kj} / 37;
 
-#$cal{hr}{weight_loss}{info} = "heart rate for the most efficient far burning";
-#$cal{hr}{weight_loss}{min} = 0.65 * $cal{calc}{max_hr};
-#$cal{hr}{weight_loss}{avg} = 0.70 * $cal{calc}{max_hr};
-#$cal{hr}{weight_loss}{max} = 0.75 * $cal{calc}{max_hr};
+sub wl_hr{
+  my $hr = 0.70 * $_[0]->{max_hr};
+  return $hr;
+}
 
-#$cal{hr}{cardio}{info} = "heart rate for the best cardio-vascular excercise";
-#$cal{hr}{cardio}{min} = 0.75 * $cal{calc}{max_hr};
-#$cal{hr}{cardio}{avg} = 0.80 * $cal{calc}{max_hr};
-#$cal{hr}{cardio}{max} = 0.85 * $cal{calc}{max_hr};
+sub cardio_hr{
+  my $hr = 0.80 * $_[0]->{max_hr};
+  return $hr;
+}
 
-
-##print Dumper \%cal;
