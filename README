@@ -2,4 +2,4 @@ insert data into data/m.json
 
 run calc.pl
 
-get the graphs and other info via www.index.html
+get the graphs and other info via www/index.html
