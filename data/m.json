@@ -8,19 +8,29 @@
         { "date": "10-Jun-2013",
           "hr_avg": 163,
           "duration": 22,
-          "note": "running"
+          "note": "running",
+          "weight": 110
         },
         { "date": "11-Jun-2013",
           "hr_avg": 158,
           "duration": 22,
-          "note": "running",
-          "weight": 110
+          "note": "running"
         },
         { "date": "12-Jun-2013",
           "hr_avg": 147,
           "duration": 25,
-          "note": "running",
-          "weight": 110
+          "note": "running"
+        },
+        { "date": "13-Jun-2013",
+	  "weight": 108,
+          "hr_avg": 145,
+          "duration": 21,
+          "note": "stepper - gym"
+        },
+        { "date": "13-Jun-2013",
+          "hr_avg": 142,
+          "duration": 10,
+          "note": "running - gym"
         }
     ]
 }

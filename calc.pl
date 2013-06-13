@@ -11,7 +11,7 @@
 use common::sense;
 use strict;
 use warnings;
-use Data::Dumper::Concise;
+#use Data::Dumper::Concise;
 use File::Slurp;
 use JSON::XS;
 
@@ -69,27 +69,25 @@ sub bmi {
 }
 
 sub kcal {
-    my $kg = $_[0]->{weight};
-    my $hr = $_[0]->{hr};
+    my $kg  = $_[0]->{weight};
+    my $hr  = $_[0]->{hr};
     my $dur = $_[0]->{duration};
     my $age = $_[0]->{age};
-    my $g = $_[0]->{gender};
+    my $g   = $_[0]->{gender};
 
     my %c = (
         info => 'constants to be used for calculations m-males, f-females',
         m => {
-            x1 => -55.0969,
-            x2 => 0.6309,
-            x3 => 0.1988,
-            x4 => 0.2017,
-            x5 => 4.184
+            x1 => -55.0969,    # intercept effect on energy usage
+            x2 => 0.6309,      # hr effect
+            x3 => 0.1988,      # weight effect
+            x4 => 0.2017,      # age effect
         },
         f => {
             x1 => -20.4022,
             x2 => 0.4472,
             x3 => 0.1263,
             x4 => 0.074,
-            x5 => 4.184
         }
       );
 
@@ -99,7 +97,7 @@ sub kcal {
            ($c{$g}{x2} * $hr) +
            ($c{$g}{x3} * $kg) +
            ($c{$g}{x4} * $age)
-          ) / $c{$g}{x5}
+          ) / 4.184		# result in kcal, otherwise kJ 
         ) * $dur;
 
     return $kcal;
