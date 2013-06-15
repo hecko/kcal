@@ -21,10 +21,16 @@
           "note": "running"
         },
         { "date": "13-Jun-2013",
-	  "weight": 108,
+	  "weight": 108.1,
           "hr_avg": 144,
           "duration": 31,
           "note": "running (10m) & stepper (20m) - gym"
+        },
+        { "date": "15-Jun-2013",
+	  "weight": 107.3,
+          "hr_avg": 144,
+          "duration": 31,
+          "note": "running (15m) & stepper (15m) - gym"
         }
     ]
 }
