@@ -6,7 +6,7 @@
 # http://www.shapesense.com/fitness-exercise/calculators/heart-rate-based-calorie-burn-calculator.aspx
 #
 # calculate HR for weight loss and cardio
-# http://www.spinning.com/en/media/spinning_news_for_spinning_enthusiasts/january09_1.html
+# http://www.heart.com/heart-rate-chart.html
 
 use common::sense;
 use strict;
@@ -21,13 +21,15 @@ my $json = decode_json get('https://raw.github.com/hecko/kcal/master/data/m.json
 
 my @www_data;
 
-$json->{max_hr}    = max_hr($json);
-$json->{cardio_hr} = cardio_hr($json);
-$json->{wl_hr}     = wl_hr($json);
+$json->{max_hr}     = max_hr($json);
+$json->{cond_hr}    = cond_hr($json);
+$json->{aerobic_hr} = aerobic_hr($json);
+$json->{wl_hr}      = wl_hr($json);
 
-say "Max HR based on age (".$json->{age}."): ".int $json->{max_hr};
-say "Ideal HR for cardio: ".int $json->{cardio_hr};
-say "Ideal HR for weight loss: ".int $json->{wl_hr};
+say "Max HR:                             ".int $json->{max_hr};
+say "Ideal HR for fitness conditioning:  ".int $json->{cond_hr};
+say "Ideal HR for aerobic/stamina/endur: ".int $json->{aerobic_hr};
+say "Ideal HR for weight loss:           ".int $json->{wl_hr};
 
 say "----------";
 
@@ -55,7 +57,7 @@ foreach my $line (@{$json->{data}}) {
     my $bmi  = bmi($data);
 
     say $line->{date}.": ".(int $kcal)." kcal; ".(sprintf ("%.2f", $bmi))." bmi; ".
-        "avg hr: ".$line->{hr_avg}."; ".$line->{note};
+        "avg hr: ".$line->{hr_avg}."; ".$line->{weight}."kg; ".$line->{note};
 
     push @www_data, { date => $line->{date},
                       kcal => $kcal,
@@ -102,7 +104,7 @@ sub kcal {
            ($c{$g}{x2} * $hr) +
            ($c{$g}{x3} * $kg) +
            ($c{$g}{x4} * $age)
-          ) / 4.184		# result in kcal, otherwise kJ 
+          ) / 4.184		# result in kcal, otherwise kJ
         ) * $dur;
 
     return $kcal;
@@ -112,16 +114,21 @@ sub max_hr {
   my $max_hr = 208 - (0.7 * $_[0]->{age});     # hax heart rate depending on age
   return $max_hr;
 }
-#$cal{calc}{burned_kj} = $cal{calc}{burned_kcal} * 4.184;
-#$cal{calc}{burned_fat_g} = $cal{calc}{burned_kj} / 37;
 
 sub wl_hr{
-  my $hr = 0.70 * $_[0]->{max_hr};
+  # burn fat
+  my $hr = 0.65 * $_[0]->{max_hr};
   return $hr;
 }
 
-sub cardio_hr{
-  my $hr = 0.80 * $_[0]->{max_hr};
+sub aerobic_hr{
+  # Increase stamina & endurance
+  my $hr = 0.75 * $_[0]->{max_hr};
   return $hr;
 }
 
+sub cond_hr{
+  # Fitness conditioning, muscle building, and athletic training
+  my $hr = 0.85 * $_[0]->{max_hr};
+  return $hr;
+}
