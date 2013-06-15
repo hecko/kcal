@@ -1,0 +1,5 @@
+Net::SSLeay
+LWP::Protocol::https
+
+on Debian 7:
+apt-get install liblwp-protocol-https-perl libnet-ssleay-perl
