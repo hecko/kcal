@@ -57,7 +57,10 @@ foreach my $line (@{$json->{data}}) {
     say $line->{date}.": ".(int $kcal)." kcal; ".(sprintf ("%.2f", $bmi))." bmi; ".
         "avg hr: ".$line->{hr_avg}."; ".$line->{note};
 
-    push @www_data, { date => $line->{date}, "kcal" => $kcal, "bmi" => $bmi };
+    push @www_data, { date => $line->{date},
+                      kcal => $kcal,
+                      kg   => $line->{weight},
+                      bmi  => $bmi };
 };
 
 my $www_data_json = encode_json \@www_data;
