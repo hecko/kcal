@@ -5,6 +5,10 @@
     "gender": "m",
     "age": 29,
     "data": [
+        {
+          "date": "17-Feb-2013",
+          "weight": 112
+        }
         { "date": "10-Jun-2013",
           "hr_avg": 163,
           "duration": 22,
