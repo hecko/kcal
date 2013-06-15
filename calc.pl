@@ -30,6 +30,7 @@ say "Max HR:                             ".int $json->{max_hr};
 say "Ideal HR for fitness conditioning:  ".int $json->{cond_hr};
 say "Ideal HR for aerobic/stamina/endur: ".int $json->{aerobic_hr};
 say "Ideal HR for weight loss:           ".int $json->{wl_hr};
+say "One BMI point:                      ".sprintf ("%.1f", $json->{height}*$json->{height}/10000)." kg";
 
 say "----------";
 
