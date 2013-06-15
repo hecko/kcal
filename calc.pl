@@ -14,8 +14,10 @@ use warnings;
 #use Data::Dumper::Concise;
 use File::Slurp;
 use JSON::XS;
+use LWP::Simple;
+use Mozilla::CA;
 
-my $json = decode_json read_file('data/m.json');;
+my $json = decode_json get('https://raw.github.com/hecko/kcal/master/data/m.json');
 
 my @www_data;
 
