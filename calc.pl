@@ -53,7 +53,7 @@ foreach my $line (@{$json->{data}}) {
             gender => $json->{gender},
         };
 
-    my $kcal = kcal($data);
+    my $kcal = kcal($data) or next;
     my $bmi  = bmi($data);
 
     say $line->{date}.": ".(int $kcal)." kcal; ".(sprintf ("%.2f", $bmi))." bmi; ".
@@ -81,6 +81,8 @@ sub kcal {
     my $dur = $_[0]->{duration};
     my $age = $_[0]->{age};
     my $g   = $_[0]->{gender};
+
+   return 0 unless ($kg && $hr && $dur && $age && $g);
 
     my %c = (
         info => 'constants to be used for calculations m-males, f-females',
