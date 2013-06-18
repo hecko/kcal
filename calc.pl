@@ -54,7 +54,7 @@ foreach my $line (@{$json->{data}}) {
         };
 
     my $kcal = kcal($data) or next;
-    my $bmi  = bmi($data);
+    my $bmi  = bmi($data) or next;
 
     say $line->{date}.": ".(int $kcal)." kcal; ".(sprintf ("%.2f", $bmi))." bmi; ".
         "avg hr: ".$line->{hr_avg}."; ".$line->{weight}."kg; ".$line->{note};
