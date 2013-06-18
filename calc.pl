@@ -3,7 +3,6 @@
 # This calculator is based on the equations (shown below) derived by LR Keytel, JH Goedecke,
 # TD Noakes, H Hiiloskorpi, R Laukkanen, L van der Merwe, and EV Lambert for their study
 # titled "Prediction of energy expenditure from heart rate monitoring during submaximal exercise."
-# http://www.shapesense.com/fitness-exercise/calculators/heart-rate-based-calorie-burn-calculator.aspx
 #
 # calculate HR for weight loss and cardio
 # http://www.heart.com/heart-rate-chart.html
@@ -63,7 +62,7 @@ foreach my $line (@{$json->{data}}) {
     push @www_data, { date => $line->{date},
                       kcal => $kcal,
                       kg   => $line->{weight},
-                      bmi  => $bmi };
+                      bmi  => $bmi } if $kcal != 0;
 };
 
 my $www_data_json = encode_json \@www_data;
