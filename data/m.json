@@ -41,6 +41,11 @@
           "hr_avg": 142,
           "duration": 20,
           "note": "running (20m) - gym"
+        },
+        { "date": "18-Jun-2013",
+          "hr_avg": 154,
+          "duration": 31,
+          "note": "running in the park"
         }
     ]
 }
