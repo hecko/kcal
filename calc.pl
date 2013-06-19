@@ -11,12 +11,13 @@ use common::sense;
 use strict;
 use warnings;
 #use Data::Dumper::Concise;
-use File::Slurp;
+use File::Slurp qw<read_file write_file>;
 use JSON::XS;
 use LWP::Simple;
 use Mozilla::CA;
 
-my $json = decode_json get('https://raw.github.com/hecko/kcal/master/data/m.json');
+# my $json = decode_json get('https://raw.github.com/hecko/kcal/master/data/m.json');
+my $json = decode_json read_file("./data/m.json");
 
 my @www_data;
 
@@ -57,7 +58,7 @@ foreach my $line (@{$json->{data}}) {
     my $bmi  = bmi($data) or next;
 
     say $line->{date}.": ".(int $kcal)." kcal; ".(sprintf ("%.2f", $bmi))." bmi; ".
-        "avg hr: ".$line->{hr_avg}."; ".$line->{weight}."kg; ".$line->{note};
+        "avg hr: ".$line->{hr_avg}."; ".sprintf("%.1f",$line->{weight})."kg; ".$line->{note};
 
     push @www_data, { date => $line->{date},
                       kcal => $kcal,

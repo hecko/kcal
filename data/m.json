@@ -1,7 +1,7 @@
 {
     "name": "marcel",
-    "weight": 110,
-    "height": 186,
+    "weight": 107,
+    "height": 188,
     "gender": "m",
     "age": 29,
     "data": [
@@ -12,17 +12,17 @@
         { "date": "10-Jun-2013",
           "hr_avg": 163,
           "duration": 22,
-          "note": "running"
+          "note": "running park"
         },
         { "date": "11-Jun-2013",
           "hr_avg": 158,
           "duration": 22,
-          "note": "running"
+          "note": "running park"
         },
         { "date": "12-Jun-2013",
           "hr_avg": 147,
           "duration": 25,
-          "note": "running"
+          "note": "running park"
         },
         { "date": "13-Jun-2013",
           "weight": 108.1,
@@ -45,6 +45,13 @@
         { "date": "18-Jun-2013",
           "hr_avg": 154,
           "duration": 31,
+          "note": "running in the park"
+        },
+        { "date": "19-Jun-2013",
+          "hr_avg": 149,
+          "duration": 30,
+          "weight": 107,
+          "height": 188,
           "note": "running in the park"
         }
     ]
