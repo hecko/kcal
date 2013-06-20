@@ -53,6 +53,12 @@
           "weight": 107,
           "height": 188,
           "note": "running in the park"
-        }
+        },
+        { "date": "20-Jun-2013",
+          "hr_avg": 160,
+          "duration": 20,
+          "note": "running in the park"
+        },
+
     ]
 }
