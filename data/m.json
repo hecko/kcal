@@ -63,6 +63,12 @@
           "hr_avg": 155,
           "duration": 31,
           "note": "running in the park"
+        },
+        { "date": "23-Jun-2013",
+          "hr_avg": 141,
+          "duration": 30,
+          "weight": 108.2,
+          "note": "running (20m) and rowing (10min/2000m) in the gym"
         }
     ]
 }
