@@ -69,6 +69,9 @@
           "duration": 30,
           "weight": 108.2,
           "note": "running (20m) and rowing (10min/2000m) in the gym"
+        },
+        { "date": "07-Aug-2013",
+          "weight": 102.5
         }
     ]
 }
